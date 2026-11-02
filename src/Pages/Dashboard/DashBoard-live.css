@@ -1,0 +1,169 @@
+
+/* Live dashboard interactions and empty/loading states */
+.dashboard-loading,
+.dashboard-inline-empty {
+  padding: 24px 4px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.dashboard-error {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  color: #ffb7b7;
+  background: rgba(255, 113, 113, 0.07);
+  border: 1px solid rgba(255, 113, 113, 0.2);
+  border-radius: 9px;
+  font-size: 12px;
+}
+.dashboard-error button {
+  color: var(--text);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+.dashboard-project-button,
+.dashboard-activity-button,
+.dashboard-upcoming-button {
+  width: 100%;
+  text-align: left;
+  color: inherit;
+  font: inherit;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+.dashboard-project-button {
+  padding: 0;
+}
+.dashboard-project-button:hover .project-progress-info strong,
+.dashboard-activity-button:hover .activity-task,
+.dashboard-upcoming-button:hover .upcoming-task-info strong {
+  color: var(--accent);
+}
+.dashboard-activity-button {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 16px 0;
+  border-bottom: 1px solid #282731;
+}
+.dashboard-activity-button:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+.dashboard-upcoming-button {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 15px 0;
+  border-bottom: 1px solid #282731;
+}
+.dashboard-upcoming-button:last-child {
+  border-bottom: 0;
+}
+.dashboard-upcoming-button:hover .task-checkbox {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.dashboard-upcoming-button .task-checkbox {
+  transition: border-color 150ms ease, color 150ms ease;
+}
+.dashboard-project-button:focus-visible,
+.dashboard-activity-button:focus-visible,
+.dashboard-upcoming-button:focus-visible,
+.dashboard-primary-button:focus-visible,
+.text-action:focus-visible,
+.icon-action:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+
+/* Keep interactive dashboard rows consistent with the dark dashboard theme.
+   These rules intentionally override generic/global button styling. */
+.dashboard-page .dashboard-panel button.dashboard-project-button,
+.dashboard-page .dashboard-panel button.dashboard-upcoming-button,
+.dashboard-page .dashboard-panel button.dashboard-activity-button {
+  appearance: none;
+  -webkit-appearance: none;
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  text-align: left;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none !important;
+  outline-offset: 3px;
+}
+
+.dashboard-page .dashboard-panel button.dashboard-project-button {
+  display: block;
+  padding: 0;
+  cursor: pointer;
+}
+
+.dashboard-page .dashboard-panel button.dashboard-upcoming-button {
+  align-items: center;
+  gap: 11px;
+  padding: 15px 0;
+  border-bottom: 1px solid #282731;
+  cursor: pointer;
+}
+
+.dashboard-page .dashboard-panel button.dashboard-activity-button {
+  align-items: center;
+  gap: 13px;
+  padding: 16px 0;
+  border-bottom: 1px solid #282731;
+  cursor: pointer;
+}
+
+.dashboard-page .dashboard-panel button.dashboard-upcoming-button:last-child,
+.dashboard-page .dashboard-panel button.dashboard-activity-button:last-child {
+  border-bottom: 0;
+}
+
+.dashboard-page .dashboard-panel button.dashboard-project-button:hover,
+.dashboard-page .dashboard-panel button.dashboard-upcoming-button:hover,
+.dashboard-page .dashboard-panel button.dashboard-activity-button:hover {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.dashboard-page .dashboard-panel button.dashboard-project-button:focus-visible,
+.dashboard-page .dashboard-panel button.dashboard-upcoming-button:focus-visible,
+.dashboard-page .dashboard-panel button.dashboard-activity-button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.dashboard-page .upcoming-task-info,
+.dashboard-page .activity-content,
+.dashboard-page .project-progress-info {
+  min-width: 0;
+}
+
+.dashboard-page .dashboard-upcoming-button .task-checkbox {
+  flex-shrink: 0;
+}
+
+.dashboard-page .dashboard-upcoming-button .upcoming-task-meta {
+  flex-shrink: 0;
+}

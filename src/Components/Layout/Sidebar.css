@@ -1,0 +1,137 @@
+.sidebar-footer {
+  position: relative;
+}
+
+.sidebar-profile-trigger {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.sidebar-profile-trigger:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-profile-trigger .user-avatar {
+  flex-shrink: 0;
+}
+
+.sidebar-profile-trigger .user-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.sidebar-profile-trigger .user-name,
+.profile-menu-name,
+.profile-menu-email {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.profile-chevron {
+  flex-shrink: 0;
+  color: #858594;
+  transition: transform 0.2s ease;
+}
+
+.profile-chevron.open {
+  transform: rotate(180deg);
+}
+
+.profile-menu {
+  position: absolute;
+  z-index: 1000;
+  bottom: calc(100% + 10px);
+  left: 0;
+  width: 100%;
+  min-width: 220px;
+  padding: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background: #17171d;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
+}
+
+.profile-menu-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 8px;
+}
+
+.profile-menu-avatar {
+  display: grid;
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border-radius: 50%;
+  background: #B6A0FF;
+  color: #17131f;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.profile-menu-details {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  gap: 4px;
+}
+
+.profile-menu-name {
+  color: #f5f5fa;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.profile-menu-email {
+  color: #9292a2;
+  font-size: 11px;
+}
+
+.profile-menu-divider {
+  height: 1px;
+  margin: 5px 0;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.profile-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: #d0d0dc;
+  text-align: left;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.profile-menu-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+
+.profile-menu-logout:hover {
+  background: rgba(255, 100, 120, 0.1);
+  color: #ff8494;
+}

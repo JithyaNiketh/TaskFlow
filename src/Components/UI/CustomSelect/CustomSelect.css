@@ -1,0 +1,131 @@
+
+.custom-select {
+  position: relative;
+  min-width: 0;
+  font-size: 12px;
+}
+
+.custom-select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: 38px;
+  padding: 9px 12px;
+  border: 1px solid rgba(182, 160, 255, 0.14);
+  border-radius: 9px;
+  background: #18181c;
+  color: #eeeaf7;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.custom-select-trigger:hover,
+.custom-select-trigger.is-open {
+  border-color: rgba(182, 160, 255, 0.55);
+  background: #1c1924;
+}
+
+.custom-select-trigger:focus-visible {
+  outline: none;
+  border-color: #B6A0FF;
+  box-shadow: 0 0 0 3px rgba(182, 160, 255, 0.12);
+}
+
+.custom-select-chevron {
+  flex-shrink: 0;
+  color: #B6A0FF;
+  transition: transform 160ms ease;
+}
+
+.custom-select-trigger.is-open .custom-select-chevron {
+  transform: rotate(180deg);
+}
+
+.custom-select-menu {
+  position: absolute;
+  z-index: 1200;
+  top: calc(100% + 7px);
+  right: 0;
+  left: 0;
+  overflow: hidden;
+  padding: 5px;
+  border: 1px solid rgba(182, 160, 255, 0.28);
+  border-radius: 10px;
+  background: #1b1a21;
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(182, 160, 255, 0.025);
+  animation: custom-select-enter 140ms ease-out;
+}
+
+.custom-select-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  min-height: 34px;
+  padding: 8px 10px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: #d9d5e4;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    color 140ms ease,
+    background 140ms ease,
+    border-color 140ms ease;
+}
+
+.custom-select-option:hover,
+.custom-select-option.is-active {
+  border-color: rgba(182, 160, 255, 0.12);
+  background: rgba(182, 160, 255, 0.12);
+  color: #cbbaff;
+}
+
+.custom-select-option.is-selected {
+  color: #B6A0FF;
+}
+
+.custom-select-option.is-selected.is-active {
+  background: rgba(182, 160, 255, 0.18);
+}
+
+.custom-select-check {
+  color: #B6A0FF;
+  font-size: 12px;
+}
+
+@keyframes custom-select-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .custom-select-trigger,
+  .custom-select-chevron,
+  .custom-select-option {
+    transition: none;
+  }
+
+  .custom-select-menu {
+    animation: none;
+  }
+}
