@@ -14,7 +14,7 @@ import Account from "./Pages/Account/Account";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/TaskFlow">
       <AuthProvider>
         <Routes>
           {/* Public authentication page */}
