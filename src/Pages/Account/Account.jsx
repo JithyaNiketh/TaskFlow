@@ -3,8 +3,12 @@ import { Check, LockKeyhole, Save, UserRound } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 import "./Account.css";
 
+const demo_id = "cf445616-9ba4-480b-8377-3009b81e791b";
+
 function Account() {
   const { user, updateProfile, changePassword } = useAuth();
+
+  const isDemoAccount = user?.id === demo_id;
 
   const [name, setName] = useState(user?.name || "");
   const [email, setEmail] = useState(user?.email || "");
@@ -35,6 +39,9 @@ function Account() {
 
   async function handleProfileSubmit(event) {
     event.preventDefault();
+
+    if (isDemoAccount) return;
+
     setProfileMessage("");
     setProfileError("");
 
@@ -62,6 +69,9 @@ function Account() {
 
   async function handlePasswordSubmit(event) {
     event.preventDefault();
+
+    if (isDemoAccount) return;
+
     setPasswordMessage("");
     setPasswordError("");
 
@@ -109,6 +119,15 @@ function Account() {
         </div>
       </header>
 
+      {isDemoAccount && (
+        <div className="account-demo-notice" role="status">
+          <LockKeyhole size={18} />
+          <span>
+            This is a demo account. Changes to personal information and password are not allowed.
+          </span>
+        </div>
+      )}
+
       <section className="account-card account-profile-card">
         <div className="account-card-heading">
           <div className="account-heading-icon">
@@ -140,6 +159,7 @@ function Account() {
                 maxLength={100}
                 autoComplete="name"
                 required
+                disabled={isDemoAccount}
               />
             </label>
 
@@ -152,6 +172,7 @@ function Account() {
                 maxLength={254}
                 autoComplete="email"
                 required
+                disabled={isDemoAccount}
               />
             </label>
           </div>
@@ -173,7 +194,7 @@ function Account() {
             <button
               type="submit"
               className="account-save-button"
-              disabled={savingProfile}
+              disabled={isDemoAccount || savingProfile}
             >
               <Save size={16} />
               {savingProfile ? "Saving..." : "Save changes"}
@@ -202,6 +223,7 @@ function Account() {
               onChange={(event) => setCurrentPassword(event.target.value)}
               autoComplete="current-password"
               required
+              disabled={isDemoAccount}
             />
           </label>
 
@@ -215,6 +237,7 @@ function Account() {
                 minLength={8}
                 autoComplete="new-password"
                 required
+                disabled={isDemoAccount}
               />
               <small>At least 8 characters.</small>
             </label>
@@ -228,6 +251,7 @@ function Account() {
                 minLength={8}
                 autoComplete="new-password"
                 required
+                disabled={isDemoAccount}
               />
             </label>
           </div>
@@ -249,7 +273,7 @@ function Account() {
             <button
               type="submit"
               className="account-save-button"
-              disabled={savingPassword}
+              disabled={isDemoAccount || savingPassword}
             >
               <LockKeyhole size={16} />
               {savingPassword ? "Updating..." : "Update password"}

@@ -465,3 +465,30 @@
   font-size: 12px;
   line-height: 1.5;
 }
+
+.auth-demo-copy {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 13px;
+  color: #92909f;
+}
+
+.auth-demo-link {
+  padding: 0;
+  border: none;
+  background: none;
+  color: #b6a0ff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.auth-demo-link:hover {
+  color: #d0c1ff;
+}
+
+.auth-demo-link:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

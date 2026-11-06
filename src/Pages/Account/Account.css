@@ -270,3 +270,33 @@
     align-items: flex-start;
   }
 }
+
+.account-demo-notice {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 18px;
+  margin-bottom: 22px;
+  border: 1px solid rgba(182, 160, 255, 0.25);
+  border-radius: 12px;
+  background: rgba(182, 160, 255, 0.07);
+  color: #c9baff;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.account-demo-notice svg {
+  flex-shrink: 0;
+  color: #b6a0ff;
+}
+
+.account-field input:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.account-save-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}

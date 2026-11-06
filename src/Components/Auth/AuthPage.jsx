@@ -83,6 +83,24 @@ export default function AuthPage() {
     }
   }
 
+  async function handleDemoLogin() {
+    setError("");
+    setSubmitting(true);
+
+    try {
+      await login({
+        email: "testacc@task.flow",
+        password: "12345678",
+      });
+
+      navigate(redirectTo, { replace: true });
+    } catch (err) {
+      setError(err.message || "Unable to log into the demo account. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
   return (
     <main className="auth-page">
       <section className="auth-visual">
@@ -291,9 +309,16 @@ export default function AuthPage() {
             </button>
           </p>
 
-          <p className="auth-legal">
-            By continuing, you agree to use TaskFlow responsibly
-            and keep your account credentials secure.
+          <p className="auth-demo-copy">
+            Just want to look around?{" "}
+            <button
+              type="button"
+              className="auth-demo-link"
+              onClick={handleDemoLogin}
+              disabled={submitting || isSignup}
+            >
+              {submitting ? "Please wait..." : "Log into a demo account"}
+            </button>
           </p>
         </div>
 
