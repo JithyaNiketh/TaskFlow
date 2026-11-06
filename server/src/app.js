@@ -7,19 +7,30 @@ import connectPgSimple from "connect-pg-simple";
 import helmet from "helmet";
 import { rateLimit } from "express-rate-limit";
 import { pool } from "./config/db.js";
+
 import authRoutes from "./routes/auth.routes.js";
 import projectsRoutes from "./routes/projects.routes.js";
 import taskRoutes from "./routes/tasks.routes.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const isProduction = process.env.NODE_ENV === "production";
 
+// Validate required environment variables
 if (!process.env.DATABASE_URL || !process.env.SESSION_SECRET) {
   throw new Error("DATABASE_URL and SESSION_SECRET must be configured.");
 }
 
-if (process.env.NODE_ENV === "production" && !process.env.CLIENT_URL?.startsWith("https://")) {
+if (
+  isProduction &&
+  !process.env.CLIENT_URL?.startsWith("https://")
+) {
   throw new Error("CLIENT_URL must use HTTPS in production.");
+}
+
+// Render runs behind a proxy
+if (isProduction) {
+  app.set("trust proxy", 1);
 }
 
 app.disable("x-powered-by");
@@ -34,6 +45,7 @@ app.use(
 
 app.use(express.json({ limit: "10kb" }));
 
+// PostgreSQL session store
 const PgSession = connectPgSimple(session);
 
 app.use(
@@ -49,15 +61,19 @@ app.use(
     saveUninitialized: false,
     cookie: {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
+      secure: isProduction,
+      sameSite: isProduction ? "none" : "lax",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     },
   })
 );
 
+// Health checks
 app.get("/api/health", (_req, res) => {
-  res.json({ status: "ok", message: "TaskFlow API is running." });
+  res.json({
+    status: "ok",
+    message: "TaskFlow API is running.",
+  });
 });
 
 app.get("/api/health/db", async (_req, res) => {
@@ -70,6 +86,7 @@ app.get("/api/health/db", async (_req, res) => {
     });
   } catch (error) {
     console.error("Database health check failed:", error.message);
+
     res.status(503).json({
       status: "error",
       message: "Database connection failed.",
@@ -77,6 +94,7 @@ app.get("/api/health/db", async (_req, res) => {
   }
 });
 
+// Rate limiting
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   limit: 20,
@@ -85,12 +103,14 @@ const authLimiter = rateLimit({
 });
 
 app.use("/api/auth", authLimiter);
+
+// API routes
 app.use("/api/auth", authRoutes);
 app.use("/api/projects", projectsRoutes);
 app.use("/api/projects/:projectId/tasks", taskRoutes);
 app.use("/api/tasks", taskRoutes);
-app.use("/api/projects/:projectId/tasks", taskRoutes);
 
-app.listen(PORT, () => {
-  console.log(`TaskFlow API running at http://localhost:${PORT}`);
+// Start server ONCE, after middleware and routes
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`TaskFlow API running on port ${PORT}`);
 });
